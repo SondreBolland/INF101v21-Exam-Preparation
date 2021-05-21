@@ -11,8 +11,14 @@ public class Student extends Person {
 		this.studentNumber = studentNumber;
 	}
 	
-	public static void main(String[] args) {
-		Person sondre = new Student(25, 1.89, Color.black, 69420);
+	@Override
+	public void talk(String text) {
+		text.addVoiceCrack();
+		System.out.println(text);
+	}
+	
+	public void talkWithConfidence(String text) {
+		super.talk(text);
 	}
 
 }

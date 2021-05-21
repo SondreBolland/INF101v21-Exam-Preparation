@@ -14,4 +14,7 @@ public class Person {
 		this.hairColor = hairColor;
 	}
 	
+	public void talk(String text) {
+		System.out.println(text);
+	}
 }
