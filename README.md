@@ -12,7 +12,7 @@ For eksempler, ta en titt på koden i repositoriet (polymorphism har eksempelet 
 I sem2 har vi mange eksempler på abstraction. Game er en abstraksjon av [M,n,k-game](https://en.wikipedia.org/wiki/M,n,k-game). GameBoard er en abstraksjon av et spillbrett (for disse type spill).
 
 ## Encapsulation
-**Encapsulation** handler om å styre eksponeringen av variabler og metoder i programmet. Ved bruk av ``public``, ``protected``, ``private`` og `` `` (blankt, ingen keyword) bestemmer vi hvilke deler av programmet som skal ha tilgang på de aktuelle variablene/metodene. I mange tilfeller ønsker vi at feltvariablene til en klasse kun er direkte tilgjengelig i selve klassen. Dermed bruker vi ``private``:
+**Encapsulation** handler om å styre eksponeringen av variabler og metoder i programmet. Ved bruk av ``public``, ``protected``, ``private`` og `` `` (blankt, ingen keyword) bestemmer vi hvilke deler av programmet som skal ha tilgang på de aktuelle variablene/metodene. I mange tilfeller ønsker vi at feltvariablene til en klasse kun er direkte tilgjengelig i selve klassen. Dette gjøres ved bruk av ``private``:
 ```java
 private double[][] gridArray;
 	
@@ -29,8 +29,8 @@ public Grid(int height, int width) {
 Hvis jeg oppretter et Grid-objekt i en annen klasse/del av programmet så vil man ikke kunne referere direkte til ``rows``, ``columns`` og ``gridArray``.
 ```java
 Grid grid = new Grid(5,5);
-int nGridRows = grid.rows; // SYNTAX ERROR
-grid.gridArray[3][2] = 50.0; // SYNTAX ERROR
+int nGridRows = grid.rows; // ERROR
+grid.gridArray[3][2] = 50.0; // ERROR
 ```
 Istedenfor ønsker vi å eksponere (gi tilgang til) variablene og metodene til klassen på en kontrolert måte. I Grid-klassen oppretter vi en set-metode hvor vi kan legge til pre-conditions for hvilke verdier som er tillatt:
 ```java
@@ -77,7 +77,42 @@ public class Student extends Person {
 	}
 }
 ```
-Nå har ``Student``-objekter alle feltvariablene og metodene i ``Person``, i tillegg til de feltvariablene og metodene som befinner seg kun i ``Student``.
+Nå har ``Student``-objekter alle feltvariablene og metodene i ``Person``, i tillegg til de feltvariablene og metodene som befinner seg kun i ``Student``. I dette eksempelet blir ``Person`` superklassen og ``Student`` subklassen. Vi sier at ``Student`` arver fra ``Person``.
+
+``super`` brukes til å referere til variabler/metoder i superklassen. Hvis en metode befinner seg i begge klassene, altså at metoden fra ``Person`` override'es i ``Student``:
+```java
+public class Person {
+	
+	...
+	
+	public void talk(String text) {
+		System.out.println(text);
+	}	
+}
+```
+```java
+public class Student extends Person {
+	
+	...
+	
+	@Override
+	public void talk(String text) {
+		text.addVoiceCrack();
+		System.out.println(text);
+	}	
+}
+```
+så kan vi kalle på metoden i superklassen inni subklassen ved bruk av ``super``:
+```java
+public class Student extends Person {
+	
+	...
+	
+	public void talkWithConfidence(String text) {
+		super.talk(text);
+	}	
+}
+```
 
 
 ## Polymorphism
