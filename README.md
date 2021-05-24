@@ -23,7 +23,7 @@ public Grid(int height, int width) {
 	rows = height;
 	columns = width;
 	
-	grid = new double[rows][columns];
+	gridArray = new double[rows][columns];
 }
 ```
 Hvis jeg oppretter et Grid-objekt i en annen klasse/del av programmet så vil man ikke kunne referere direkte til ``rows``, ``columns`` og ``gridArray``.
