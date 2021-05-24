@@ -44,7 +44,7 @@ Istedenfor ønsker vi å eksponere (gi tilgang til) variablene og metodene til k
 public void set(int x, int y, double value) {
 	if (value > 100.0)
 		throw new IllegalArgumentException("No values above 100.0 are allowed");
-	grid[x][y] = value;
+	gridArray[x][y] = value;
 }
 ```
 
